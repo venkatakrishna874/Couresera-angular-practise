@@ -1,0 +1,47 @@
+<div class="container" ng-controller="MenuController">
+    <div class="row row-content">
+        <div class="col-xs-12">
+            <button ng-click="toggleDetails()" class="btn btn-xs btn-primary pull-right" type="button">
+                {{showDetails ? 'Hide Details':'Show Details'}}
+            </button>
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation">
+                    <a aria-controls="all menu" role="tab" ng-click="select(1)" ng-class="{active:isSelected(1)}">The Menu</a></li>
+                <li role="presentation">
+                    <a aria-controls="appetizers" role="tab" ng-click="select(2)" ng-class="{active:isSelected(2)}">Appetizers</a></li>
+                <li role="presentation">
+                    <a aria-controls="mains" role="tab" ng-click="select(3)" ng-class="{active:isSelected(3)}">Mains</a></li>
+                <li role="presentation">
+                    <a aria-controls="desserts" role="tab" ng-click="select(4)" ng-class="{active:isSelected(4)}">Desserts</a></li>
+            </ul>
+            <div class="tab-content">
+                <ul class="media-list">
+                    <li class="media" ng-repeat="dish in dishes | filter:filtText ">
+                        <div class="media-left ">
+                            <a ng-href="#/menu/{{dish._id}}">
+                                <img class="media-object img-thumbnail" ng-src={{dish.image}} alt="{{dish.name}}">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <h2 class="media-heading">{{dish.name}}
+                         <span class="label label-danger">{{dish.label}}</span>
+                         <span class="badge">{{dish.price | currency}}</span></h2>
+                            <div ng-show="showDetails">
+                                <p>{{dish.description}}</p>
+                                <p>Comment: {{dish.comment}}</p>
+                                <blockquote ng-repeat="comment in dish.comments ">
+
+                                    <p>{{comment.rating}} Stars</p>
+                                    <p>{{comment.comment}}</p>
+                                    <footer>{{comment.author}} <cite title="Source Title">{{comment.date | date:'medium'}}</cite></footer>
+
+                                </blockquote>
+                                
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
