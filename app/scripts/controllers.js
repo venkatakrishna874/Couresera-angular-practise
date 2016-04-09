@@ -28,9 +28,9 @@ angular.module('confusionApp')
 
     }])
     .controller('DishDetailController', ['$scope', 'menuFactory', '$stateParams', function ($scope, menuFactory, $stateParams) {
-//        console.log(parseInt($stateParams.id,10));
+        //        console.log(parseInt($stateParams.id,10));
         console.log($stateParams.id);
-        var dish= menuFactory.getDish(parseInt($stateParams.id,10)); 
+        var dish = menuFactory.getDish(parseInt($stateParams.id, 10));
         console.log(dish);
         $scope.dish = dish;
         $scope.comment = {
@@ -105,6 +105,20 @@ angular.module('confusionApp')
             }
         };
         }])
-.controller('IndexController',['$scope',function($scope){
-    console.log(`welcome to index controller`);
-}]);
+    .controller('IndexController', ['$scope', 'menuFactory', 'corporateFactory', 'promotionService', function ($scope, menuFactory, corporateFactory, promotionService) {
+        //            console.log(`${corporateFactory.getLeader(1)}`);
+        //            console.log(corporateFactory.getLeaders());
+        $scope.dish = menuFactory.getDish(Math.floor(Math.random() * (4)));
+       
+        $scope.promotion = promotionService.getPromotions();
+        $scope.executiveChef = corporateFactory.getLeader(Math.floor(Math.random() * (4)));
+       
+
+   
+
+}])
+    .controller('AboutController', ['$scope', 'menuFactory', 'corporateFactory', function ($scope, menuFactory, corporateFactory) {
+         $scope.corporateChefs = corporateFactory.getLeaders();
+        console.log( $scope.corporateChefs);
+       
+    }]);

@@ -59,7 +59,7 @@ grunt.initConfig({
         }
     },
     useminPrepare: {
-        html: 'app/menu.html',
+        html: 'app/index.html',
         options: {
             dest: 'dist'
         }
@@ -92,6 +92,7 @@ grunt.initConfig({
             // in dist directory
             files: [{
                 src: [
+                    'dist/views/*.html',
                     'dist/scripts/*.js',
                     'dist/styles/*.css',
                 ]
@@ -108,6 +109,22 @@ grunt.initConfig({
         options: {
             assetsDirs: ['dist', 'dist/styles']
         }
+    },
+    ngAnnotate:{
+        options: {
+            singleQuotes: true,
+        },
+         app1: {
+            files: [
+                {
+                    expand: true,
+                    src: ['app/**/app.js']
+                }
+            ]
+                
+            
+        }
+        
     },
       watch: {
         copy: {
@@ -161,12 +178,14 @@ grunt.initConfig({
     'useminPrepare',
     'concat',
     'cssmin',
+     
     'uglify',
     'copy',
+     
     'filerev',
     'usemin'
   ]);
 
 grunt.registerTask('serve',['build','connect:dist','watch']);
-
+grunt.registerTask('annote',['ng-annotate']);
 };
